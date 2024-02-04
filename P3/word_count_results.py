@@ -3,6 +3,7 @@ Codigo realizado para determinas media, moda, mediana, varianza, desv. standard
 usar txt en formato utf-8 como entrada
 puede trabajar con nuemeros en formato flotante.
 Se implementa una condicion para retirar letras y dejar solo numeros
+Parametos: requiere unicamente usar el comando python nombre_archivo.py archivo_txt.txt
 LUIS ALFONSO SABANERO ESQUIVEL A01273286
 ENERO 2024
 '''
@@ -15,13 +16,20 @@ NOMBRE_ARCHIVO = sys.argv[1]
 RESULTADO_ARCHIVO = "WordCountResults.txt"
 with open(NOMBRE_ARCHIVO, 'r', encoding='UTF-8') as file:
     MASTER = file.read()
+#CREAMOS UNA VARIABLE MAESTROA PARA PODER ALMACENAR PALABRA Y COINCIDENCIA POSTERIORMENTE
 for I in MASTER.split():
+#EN CASO QUE EXISTA LA PALABRA AGREGAMOS UNA COINCIDENCIA
     if I in DIC_CONTADOR:
         DIC_CONTADOR[I]=DIC_CONTADOR[I]+1
     else:
+#EN CASO QUE NO AGREGAMOS UN 1
         DIC_CONTADOR[I]=1
+#CALCULAMOS TIEMPO FINAL
 TIEMPO_FINAL = time.time() - TIEMPO_INICIO
-with open(RESULTADO_ARCHIVO, 'w',encoding='UTF-8') as ARCHIVO:
+#OPERACION DE ESCRITURA, PUEDE CONCATENAR EL ARCHIVO,
+#GUARDA EL VALOR ITEM Y VALOR DEL DICCIONARIO CREADO
+with open(RESULTADO_ARCHIVO, 'a',encoding='UTF-8') as ARCHIVO:
+    ARCHIVO.write(f"Archivo: {sys.argv[1]}\n")
     for ITEM,VALOR in DIC_CONTADOR.items():
         print(f"{ITEM}: {VALOR}")
         LINEA = f"{ITEM}: {VALOR}\n"
