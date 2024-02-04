@@ -1,9 +1,9 @@
 '''
-Codigo realizado para determinas media, moda, mediana, varianza, desv. standard
+Codigo realizado para determinar la cantidad de veces que
+una palabra aparece en el archivo txt
 usar txt en formato utf-8 como entrada
-puede trabajar con nuemeros en formato flotante.
-Se implementa una condicion para retirar letras y dejar solo numeros
-Parametos: requiere unicamente usar el comando python nombre_archivo.py archivo_txt.txt
+Parametos: requiere unicamente usar el comando
+python nombre_archivo.py archivo_txt.txt
 LUIS ALFONSO SABANERO ESQUIVEL A01273286
 ENERO 2024
 '''
