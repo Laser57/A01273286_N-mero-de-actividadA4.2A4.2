@@ -9,23 +9,23 @@ ENERO 2024
 '''
 import time
 import sys
-TIEMPO_INICIO = time.time()
-MASTER = []
-NUMEROS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.', ',']
+tiempo_inicio = time.time()
+master = []
+numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.', ',']
 NOMBRE_ARCHIVO = sys.argv[1]
 #LEEMOS EL ARCHIVO PASADO COMO PARAMETRO EN LA FUNCION
 with open(NOMBRE_ARCHIVO, 'r', encoding='UTF-8') as file:
     for linea in file:
         AUX = ""
         for i in linea.strip():
-            if i in NUMEROS:
+            if i in numeros:
                 if i in [',',';']:
                     i='.'
                 AUX += i
             else:
                 break
         if AUX != "":
-            MASTER.append(float(AUX))
+            master.append(float(AUX))
         else:
             print(f"Linea {linea} con valor invalido, se omite")
 MEAN = 0
@@ -35,53 +35,53 @@ MODA = 0
 SUMA_CUADRADOS_DIFERENCIAS = 0
 RESULTADO_ARCHIVO = "StatisticsResults.txt"
 #CALCULO PARA DETERMINAR LA MEDIA SUMATORIA DE LOS VALORES / CANTIDAD DE VALRES
-for i in MASTER:
+for i in master:
     MEAN += i
-MEAN = MEAN/len(MASTER)
-print(f"Count: {len(MASTER)}")
+MEAN = MEAN/len(master)
+print(f"Count: {len(master)}")
 print(f"MEAN: {MEAN}")
 #CALCULO VARIANZA VALOR X - MEDIA AL CUADRADO/LONGITUD -1
 #DESVIACION ESTANDARD = RAIZ CUADARADA DE VARIANZA
-for x in MASTER:
+for x in master:
     SUMA_CUADRADOS_DIFERENCIAS += (x - MEAN) ** 2
-VARIANZA = SUMA_CUADRADOS_DIFERENCIAS / (len(MASTER) - 1)
+VARIANZA = SUMA_CUADRADOS_DIFERENCIAS / (len(master) - 1)
 DESV_STD = VARIANZA ** (1 / 2)
 print(f"VARIANZA: {VARIANZA}")
 print(f"Desv Std: {DESV_STD}")
 
-DATOS_ORDENADO = sorted(MASTER)
-CANTIDAD_ELEMENTOS = len(DATOS_ORDENADO)
+datos_ordenado = sorted(master)
+cantidad_elementos = len(datos_ordenado)
 
 #MEDIANA ES UN VALOR QUE REQUIERE LA LISTA ORDENADA DETERMINAMOS SEGUN EL CASO
 #SI SON NUMEROS IMPARES O PARES
-if CANTIDAD_ELEMENTOS % 2 == 1:
-    MEDIANA = DATOS_ORDENADO[CANTIDAD_ELEMENTOS // 2]
+if cantidad_elementos % 2 == 1:
+    mediana = datos_ordenado[cantidad_elementos // 2]
 else:
-    INDICE1 = CANTIDAD_ELEMENTOS // 2 - 1
-    INDICE2 = CANTIDAD_ELEMENTOS // 2
-    MEDIANA = (DATOS_ORDENADO[INDICE1] + DATOS_ORDENADO[INDICE2]) / 2
-print(f"MEDIANA: {MEDIANA}")
-FRECUENCIAS = {}
+    indice1 = cantidad_elementos // 2 - 1
+    indice2 = cantidad_elementos // 2
+    mediana = (datos_ordenado[indice1] + datos_ordenado[indice2]) / 2
+print(f"MEDIANA: {mediana}")
+frecuencias = {}
 #CALCULO PARA LA MODA, DERTEMINAMOS CUAL ELEMENTO SE REPITE MAS
-for elemento in MASTER:
-    if elemento in FRECUENCIAS:
-        FRECUENCIAS[elemento] += 1
+for elemento in master:
+    if elemento in frecuencias:
+        frecuencias[elemento] += 1
     else:
-        FRECUENCIAS[elemento] = 1
+        frecuencias[elemento] = 1
 MAX_FRECUENCIA = 0
-for elemento, frecuencia in FRECUENCIAS.items():
+for elemento, frecuencia in frecuencias.items():
     if frecuencia > MAX_FRECUENCIA:
         MAX_FRECUENCIA = frecuencia
         MODA = elemento
 print(f"MODA: {MODA}")
-TIEMPO_FINAL = time.time() - TIEMPO_INICIO
+tiempo_final = time.time() - tiempo_inicio
 with open(RESULTADO_ARCHIVO, 'a',encoding='UTF-8') as ARCHIVO:
     ARCHIVO.write(f"Archivo: {sys.argv[1]}\n")
-    ARCHIVO.write(f"Count: {len(MASTER)}\n")
+    ARCHIVO.write(f"Count: {len(master)}\n")
     ARCHIVO.write(f"MEAN: {MEAN}\n")
     ARCHIVO.write(f"VARIANZA: {VARIANZA}\n")
     ARCHIVO.write(f"Desv Std: {DESV_STD}\n")
-    ARCHIVO.write(f"MEDIANA: {MEDIANA}\n")
+    ARCHIVO.write(f"MEDIANA: {mediana}\n")
     ARCHIVO.write(f"MODA: {MODA}\n")
-    ARCHIVO.write(f"Tiempo de ejecución:{TIEMPO_FINAL}\n")
-print(f"Tiempo de ejecución: {TIEMPO_FINAL} segundos")
+    ARCHIVO.write(f"Tiempo de ejecución:{tiempo_final}\n")
+print(f"Tiempo de ejecución: {tiempo_final} segundos")
