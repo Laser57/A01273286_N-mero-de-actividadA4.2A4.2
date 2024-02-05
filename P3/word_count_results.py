@@ -9,30 +9,28 @@ ENERO 2024
 '''
 import time
 import sys
-TIEMPO_INICIO = time.time()
-MASTER =""
-DIC_CONTADOR={}
+tiempo_inicio = time.time()
+dic_contador = {}
 NOMBRE_ARCHIVO = sys.argv[1]
 RESULTADO_ARCHIVO = "WordCountResults.txt"
 with open(NOMBRE_ARCHIVO, 'r', encoding='UTF-8') as file:
-    MASTER = file.read()
+    master = file.read()
 #CREAMOS UNA VARIABLE MAESTROA PARA PODER ALMACENAR PALABRA Y COINCIDENCIA POSTERIORMENTE
-for I in MASTER.split():
+for palabra in master.split():
 #EN CASO QUE EXISTA LA PALABRA AGREGAMOS UNA COINCIDENCIA
-    if I in DIC_CONTADOR:
-        DIC_CONTADOR[I]=DIC_CONTADOR[I]+1
+    if palabra in dic_contador:
+        dic_contador[palabra] += 1
     else:
-#EN CASO QUE NO AGREGAMOS UN 1
-        DIC_CONTADOR[I]=1
+        dic_contador[palabra] = 1
 #CALCULAMOS TIEMPO FINAL
-TIEMPO_FINAL = time.time() - TIEMPO_INICIO
+tiempo_final = time.time() - tiempo_inicio
 #OPERACION DE ESCRITURA, PUEDE CONCATENAR EL ARCHIVO,
 #GUARDA EL VALOR ITEM Y VALOR DEL DICCIONARIO CREADO
-with open(RESULTADO_ARCHIVO, 'a',encoding='UTF-8') as ARCHIVO:
-    ARCHIVO.write(f"Archivo: {sys.argv[1]}\n")
-    for ITEM,VALOR in DIC_CONTADOR.items():
-        print(f"{ITEM}: {VALOR}")
-        LINEA = f"{ITEM}: {VALOR}\n"
-        ARCHIVO.write(LINEA)
-    ARCHIVO.write(f"Tiempo de ejecución:{TIEMPO_FINAL}")
-print(f"Tiempo de ejecución: {TIEMPO_FINAL} segundos")
+with open(RESULTADO_ARCHIVO, 'a', encoding='UTF-8') as archivo:
+    archivo.write(f"Archivo: {sys.argv[1]}\n")
+    for item, valor in dic_contador.items():
+        print(f"{item}: {valor}")
+        linea = f"{item}: {valor}\n"
+        archivo.write(linea)
+    archivo.write(f"Tiempo de ejecución: {tiempo_final}")
+print(f"Tiempo de ejecución: {tiempo_final} segundos")
